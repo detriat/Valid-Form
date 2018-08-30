@@ -83,10 +83,9 @@
             }
         },
         created(){
-            for (let i = 0; i < this.info.length; i++) {
-                const item = this.info[i];
+            this.info.forEach(function(item){
                 this.controls.push(item.pattern.test(item.value));
-            }
+            });
         },
         methods: {
             onChangeData(index, data){
@@ -94,12 +93,10 @@
                 this.controls[index] = data.valid;
 
                 let done = 0;
-
-                for (let i = 0; i < this.controls.length; i++) {
-                    if (this.controls[i]) {
-                        done++;
-                    }
-                }
+                
+                this.controls.map(function(item){
+                    if (item) done++;
+                });
 
                 this.done = done;
             }
